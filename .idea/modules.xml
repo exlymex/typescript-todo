@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../typescript-todo/.idea/TypescriptTodo.iml" filepath="$PROJECT_DIR$/../typescript-todo/.idea/TypescriptTodo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../typescript-todo/.idea/typescript-todo.iml" filepath="$PROJECT_DIR$/../typescript-todo/.idea/typescript-todo.iml" />
     </modules>
   </component>
 </project>
