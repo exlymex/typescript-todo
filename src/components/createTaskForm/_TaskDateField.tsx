@@ -5,7 +5,11 @@ import {DesktopDatePicker} from "@mui/x-date-pickers";
 import {TextField} from "@mui/material";
 import {IDateField} from "./interfaces/IDateField";
 
-export const TaskDateField: FC<IDateField> = ({value= new Date(),onChange= (date) => console.log(date),disabled=false}): ReactElement => {
+export const TaskDateField: FC<IDateField> = ({
+                                                  value = new Date(),
+                                                  onChange = (date) => console.log(date),
+                                                  disabled = false
+                                              }): ReactElement => {
     return (
         <>
             <LocalizationProvider dateAdapter={AdapterDateFns}>
