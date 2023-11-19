@@ -10,6 +10,7 @@ import {rootContext} from "./context/root.context";
 
 const queryClient = new QueryClient()
 const App: FC = (): ReactElement => {
+    console.log('test')
     return (
         <QueryClientProvider client={queryClient}>
             <ComposeContext components={rootContext}>

@@ -37,3 +37,56 @@ TaskFooter.propTypes = {
     status: PropTypes.string
 };
 
+
+
+
+import React, {createContext, useContext, useState} from "react";
+import {getAllChats} from "../services/chatsApi";
+import {ChatContextType, IChat, IChats} from "../../types";
+import {perPage} from "../utils/consts/pagePaginationSize";
+import {useAuth} from "./AuthContext";
+
+export const ChatContext = createContext<ChatContextType>(
+    {} as ChatContextType
+);
+
+export const useChat = () => useContext(ChatContext);
+
+const ChatProvider: React.FC<{ children: any }> = ({children}) => {
+    const {logout,setError} = useAuth();
+
+    const [currentChat, setCurrentChat] = useState<IChat[] | null>(null)
+    const [page, setPage] = useState<number>(1)
+    const [chats, setChats] = useState<IChat[] | null>(null)
+    const [totalPages, setTotalPages] = useState<number | undefined>(undefined);
+    const [projectId, setProjectId] = useState(1)
+    const fetchChats = (page: number) => {
+        getAllChats("chats", {pagination: {page, perPage}})
+            .then((data: IChats | undefined) => {
+                if (data) {
+                    setTotalPages(Math.ceil(data.total / perPage));
+                    setChats([...data.response]);
+                    return;
+                }
+            })
+            .catch((error) => {
+                if (error?.response?.status === 422) {
+                    logout()
+                    setError("Your token were expired")
+                }
+                if (error?.response?.status === 403) {
+                    setError("You don't have all permissions")
+
+                } else {
+                    setError("Server Error")
+                }
+            })
+    };
+    return (
+        <ChatContext.Provider value={{chats, totalPages, fetchChats, projectId,setProjectId,currentChat,setCurrentChat,page,setPage}}>
+            {children}
+        </ChatContext.Provider>
+    );
+};
+
+export default ChatProvider;

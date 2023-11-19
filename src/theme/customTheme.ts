@@ -11,6 +11,15 @@ export const customTheme: ThemeOptions = createTheme({
         background:{
             paper:'#151515',
             default:"rgba(0,0,0,.96)"
-        }
-    }
+        },
+    },
+    breakpoints: {
+        values: {
+            xs: 0,
+            sm: 550,
+            md: 769,
+            lg: 1024,
+            xl: 1440,
+        },
+    },
 })
